@@ -30,7 +30,7 @@ async function fetchData(url) {
 async function fetchAndShowResult(url){
     const data = await fetchData(url);
     if (data && data.results){
-        showResults(data.results); // have to define this function 
+        showResults(data.results); //defined at bottom 
     }
 }
 
@@ -50,7 +50,7 @@ function createMovieCard(movie){
   //check for a release date 
   const formattedDate = release_date || "No release date available";
 
-  //movie card html 
+  //movie card html format
   const cardTemplate = `
   <div class="column"> 
       <div class="card"> 
@@ -83,8 +83,8 @@ function clearResults(){
 }
 
  
-//disppaly results on page 
+//display results on page 
 function showResults(item){
     const newContent = item.map(createMovieCard).join("");
-    result.innerHTML += content || "<p> No results found. Search again. </p>";
+    result.innerHTML += newContent || "<p> No results found. Search again. </p>";
 }
