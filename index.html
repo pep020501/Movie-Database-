@@ -3,9 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Movie DB</title>
+
+    <!--css-->
+    <link rel="stylesheet" href="./css/styles.css">
+    <!--js-->
+    <script src="./js/index.js" defer></script>
 </head>
 <body>
+    <!--heading-->
+    <div class="container">
+        <div class="search-box">
+            <a href="#"><h1>Movie Database</h1></a>
+            <form id="search-form">
+                <input type="text" name="search-input" id="search-input"
+                placeholder="Find a Movie"/>
+                <button type="submit" class="search-btn">Submit</button>
+            </form>
+        </div>
+        <!--placeholder for dynamic contents-->
+        <div id="result"></div>
+    </div>
     
 </body>
 </html>

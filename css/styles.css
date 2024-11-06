@@ -1,0 +1,57 @@
+*{
+    margin: 0;
+    padding: 0; 
+    box-sizing: border-box;
+    outline: none; 
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+a{
+  color:#ffffff;
+  text-decoration: none;;
+}
+
+body{
+    color: #ffffff;
+    background-color: #060623ea;
+    padding: 20px;
+}
+
+.search-box{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between; 
+    margin: 15px 0 30px 0;
+}
+
+.search-box form{
+    display: flex;
+    width: 400px;
+}
+
+.search-box input {
+    width: 50%;
+    padding: 8px; 
+    border-radius: 0.4rem 0 0 0.4rem;
+    border: none;
+    
+}
+
+.search-box .search-btn{
+    width: 120px;
+    color:#ffffff;
+    background-color: #0c62e4;
+    cursor: pointer;
+    padding: 6px 8px;
+    border: 1px solid; 
+    border-radius: 0 0.4rem 0.4rem 0; 
+    transition: all 0.5s ease-in;
+}
+
+.search-box .search-btn:hover{
+    background-color: #a0c3f8;
+    color: #0c62e4;
+}
+
+/* styling dynamic stuff from js */
