@@ -64,16 +64,20 @@ body{
     flex-direction: column;
 }
 
-.container .card{
-    position: relative;
-    font-size: 14px;
-    border: 1px solid rgba(255, 255, 255, 0.6);;
-    border-radius: 0.4rem;
-    line-height: 20px;
-    height: 360px;
-    width: 285px;
-    
-    
+.container .card {
+  position: relative;
+  font-size: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 0.4rem;
+  line-height: 20px;
+  width: 285px;
+  height: 360px;
+  overflow: hidden;
+  transition: all 0.5s ease;
 }
+
+
+
+
 
 
