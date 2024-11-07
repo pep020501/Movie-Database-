@@ -1,17 +1,17 @@
 // configuration 
-const APIKey = "4584fd97b0a992aaa88c94e61e90e09a";
+const APIKey = "4584fd97b0a992aaa88c94e61e90e09a"; 
 const imgAPI = "https://image.tmdb.org/t/p/w1280";
 const searchUrl = `https://api.themoviedb.org/3/search/movie?api_key=${APIKey}&
 query=`;
 
-//connect html elemnts and bring them inside js
+//connect html elements and bring them inside js
 const form = document.querySelector("#search-form");
 const query = document.querySelector("#search-input");
 const result = document.querySelector("#result");
 
 // functions for logic processing 
 let page = 1;
-let isSearching = false;
+let isSearching = false; //user typing in searchbox 
 
 // get the JSON data to be displayed on initial load 
 async function fetchData(url) {
@@ -34,7 +34,7 @@ async function fetchAndShowResult(url){
     }
 }
 
-// movie cards 
+// movie card function 
 function createMovieCard(movie){
   //destructure movie object so object name doesn't have to be called everytime
   //certain paramter is called
@@ -73,6 +73,7 @@ function createMovieCard(movie){
          </div>
         </div>
        </div> 
+       
   `;
   return cardTemplate;
 }
@@ -88,3 +89,58 @@ function showResults(item){
     const newContent = item.map(createMovieCard).join("");
     result.innerHTML += newContent || "<p> No results found. Search again. </p>";
 }
+
+// load results 
+async function loadMoreResults(){
+    if(isSearching){
+     return;
+    }
+    page++;
+    const searchTerm = query.value; 
+    const url = searchTerm ? `${searchUrl} ${searchTerm}&page=${page}`: 
+    `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=${APIKey}&page=${page}`;
+
+    await fetchAndShowResult(url);
+}
+
+// function that detects the end of a page 
+function detectEnd() {
+    const {scrollTop, clientHeight, scrollHeight} = document.documentElement;
+    if(scrollTop + clientHeight >= scrollHeight - 20) {
+        loadMoreResults();
+    }
+}
+
+//handle the search operation itself 
+//the form element --- this is an endpoint to the server side operations 
+//e is the event parameter 
+async function handleSearch(e){
+    console.log('Debug: inside the handleSearch function');
+    //what to do when form is submitted 
+    e.preventDefault();
+    const searchTerm = query.value.trim();
+    console.log(`input term by user ${searchTerm}`);
+
+    if(searchTerm) {
+        isSearching = true;
+        clearResults();
+        const newUrl = `${searchUrl}${searchTerm}&page=${page}`;
+        await fetchAndShowResult(newUrl);
+        query.value = "";
+    }
+}
+
+// function calls
+form.addEventListener("submit", handleSearch);
+window.addEventListener("scroll", detectEnd);
+window.addEventListener("resize", detectEnd);
+
+// init functions for whole UI 
+async function init(){
+    clearResults();
+    const url=`https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=${APIKey}&page=${page}`;
+    isSearching = false;
+    await fetchAndShowResult(url);
+}
+
+init();
